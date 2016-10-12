@@ -1,0 +1,905 @@
+
+ <!DOCTYPE html>
+ <head>
+ 
+ </head>
+ <body ng-app="ngAppDemo">
+ <!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    
+    <a href="#" class="btn btn-primary" role="button" target="_blank">My Page</a>
+    <a href="#" class="btn btn-primary" role="button" target="_blank">Covered Tickers</a>
+    <a href="#" class="btn btn-primary" role="button" target="_blank">All Tickers</a>
+    <a href="#" class="btn btn-primary" role="button" target="_blank">Upload Documnet</a>
+     <div class="navbar-header navbar-right" >
+      <p class="navbar-text">
+      <a href="#" class="navbar-link"><b>Arjun_Kadam</b></a>
+      </p>
+    </div>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Ticker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#" target="_blank">Count</a></li>
+                <li>
+               <li><a href="#" target="_blank">Latest Date</a></li>
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Company <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">UBS</a></li>
+                        <li><a href="#">MS</a></li>
+                        <li><a href="#">BALM</a></li>
+                        <li><a href="#">APPLE</a></li>
+                        <li><a href="#">CITI</a></li>
+                        <li><a href="#">Filings</a></li>
+                        <li><a href="#">CS</a></li>
+                        <li><a href="#">DB</a></li>
+                        <li><a href="#">Jaffriene</a></li>
+                        <li><a href="#">Avando</a></li>
+                        <li><a href="#">Northcol</a></li>
+                        <li><a href="#">Stifen</a></li>
+                        <li><a href="#">RBC</a></li>
+                        <li><a href="#">BMO</a></li>
+                        <li><a href="#">Maxim</a></li>
+                        <li><a href="#">Davidso</a></li>
+                        <li><a href="#">RJ</a></li>
+                        <li><a href="#">Openh</a></li>
+                        <li><a href="#">KBW</a></li>
+                        <li><a href="#">Leerin</a></li>
+                    </ul>
+                </li>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<br/>
+<br/>
+<br/>
+<br/>
+	<div class="container-fluid">
+ <table class="table table-bordered table-hover table-responsive">
+  <tbody>
+    <tr>
+      <td>
+        AAPL
+      </td>
+      <td>
+        10
+      </td>
+      <td>
+        9-28-2016
+      </td>
+      <td>
+        Apple Inc
+      </td>
+      <td>
+        2QFY 12-9-201515.00.00
+      </td>
+      <td>
+        2QFY 12-9-2015
+        15.00.00      </td>
+      <td bgcolor="#DEB887">
+        2QFY 12-9-2015
+        15.00.00
+      </td>
+      <td>
+        2QFY 12-9-2015
+        15.00.00
+      </td>
+      <td>
+        2QFY 12-9-2015
+        15.00.00
+      </td>
+      <td>
+        2QFY 12-9-2015
+        15.00.00
+      </td>
+      <td bgcolor="#E9967A">
+        2QFY 12-9-2015
+        15.00.00
+      </td>
+      <td bgcolor="#DEB887">
+        2QFY 12-9-2015
+        15.00.00
+      </td>
+      <td>
+        2QFY 12-9-2015
+        15.00.00
+      </td>
+      <td bgcolor="#FF7F50">
+        2QFY 12-9-2015
+        15.00.00
+      </td>
+    </tr>
+  </tbody>
+</table>
+		<div class="row">
+			<br>
+				<div ng-controller="ngAppDemoController">
+					<div class="col-md-12 col-lg-12" ultimate-datatable="datatable">
+					</div>
+				</div>
+			</div>
+	</div>
+</body>
+ <link rel="stylesheet" href="http://institut-de-genomique.github.io/Ultimate-DataTable/js/bootstrap/css/bootstrap-3.3.4.min.css">
+ <link rel="stylesheet" href="http://institut-de-genomique.github.io/Ultimate-DataTable/js/font-awesome/css/font-awesome.min.css">
+ <link rel="stylesheet" href="http://institut-de-genomique.github.io/Ultimate-DataTable/css/ultimate-datatable-3.2.1.css">
+ <script src="http://institut-de-genomique.github.io/Ultimate-DataTable/js/jquery/jquery_1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+ <script src="http://institut-de-genomique.github.io/Ultimate-DataTable/js/bootstrap/js/bootstrap-3.3.4.min.js" type="text/javascript" charset="utf-8"></script>
+ <script src="http://institut-de-genomique.github.io/Ultimate-DataTable/js/angular-js/angular-1.3.16.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="http://institut-de-genomique.github.io/Ultimate-DataTable/js/momentjs.js" type="text/javascript" charset="utf-8"></script>
+ <script src="http://institut-de-genomique.github.io/Ultimate-DataTable/js/ultimate-datatable-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="/index.js"></script>-->
+
+ <script type="text/javascript" charset="utf-8">
+    angular.module('ngAppDemo', ['ultimateDataTableServices']).controller('ngAppDemoController', ['$scope','datatable',function($scope, datatable) {
+    
+      var datatableConfig = {
+        "name":"simple_datatable",
+        "columns":[
+          {
+            "header":"TransacDate",
+            "property":"transactiondate",
+            "order":true,
+            "group":true,
+            "type":"date",
+            "edit":true
+          },
+          {
+            "header":"ModelDate",
+            "property":"modeldate",
+            "order":true,
+            "group":true,
+            "type":"date",
+            "edit":true
+          },
+          {
+            "header":"Period",
+            "property":"period",
+            "order":true,
+            "type":"text",
+            "groupMethod":"collect"
+          },
+          {
+            "header":"Source",
+            "property":"source",
+            "order":true,
+            "type":"text",
+            "groupMethod":"collect"
+          },
+          {
+            "header":"Txntype",
+            "property":"txntype",
+            "order":true,
+            "type":"text",
+            "groupMethod":"collect"
+          },
+          {
+            "header":"TxnId",
+            "property":"txnid",
+            "order":true,
+            "type":"text",
+            "groupMethod":"collect"
+          },
+          {
+            "header":"DocumentId",
+            "property":"documentid",
+            "order":true,
+            "type":"text",
+            "groupMethod":"collect"
+          },
+          {
+            "header":"U/D",
+            "property":"uid",
+            "order":true,
+            "type":"text",
+            "groupMethod":"collect"
+          },
+          {
+            "header":"Metafile",
+            "property":"metafile",
+            "order":true,
+            "type":"text",
+            "edit":true,
+            "groupMethod":"collect",
+            "render":"<a target='blank' ng-href='{{cellValue}}'>{{cellValue}}</a>"
+          }
+          
+        ],
+        "edit":{
+          "active":true,
+          "columnMode":true
+        },
+        "filter":{
+          "active":true,
+          "highlight":true,
+          "columnMode":true
+        },
+        "pagination":{
+          "mode":'local'
+        },
+        "order":{
+          "mode":'local'
+        },
+        "remove":{
+          "active":true,
+          "mode":'local'
+        },
+        "save":{
+          "active":true,
+          "mode":'local'
+        },
+        "add":{
+          "active":false,
+          "showButton":true
+        },
+        "group":{
+          "active":true,
+        },
+        "compact":true,
+        "exportCSV":{
+          active:true,//Active or not
+          showButton:true,//Show the export button in the toolbar
+          delimiter:";"//Set the delimiter
+        }
+      };
+      
+      var datatableData = [
+  {
+    "_id": "55bf2df29a1542b3b4d43b70",
+    "index": 0,
+    "guid": "3441c0a1-3c41-45a3-9c76-8deedc0ecfff",
+    "isActive": false,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "1QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2f8827ac5d0e1d946",
+    "index": 1,
+    "guid": "5c482ce9-0ba7-40d4-b2ea-d49e4886434c",
+    "isActive": false,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df274fbad9567dada6a",
+    "index": 2,
+    "guid": "fdbea7f4-e8ed-408f-b3d5-537aee0e1fa8",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "1QFY2015",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233887",
+  },
+  {
+    "_id": "55bf2df29a59a707be986b20",
+    "index": 3,
+    "guid": "f54522e3-4feb-4ce6-8d10-4ec1b0ea4deb",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "1QFY2016",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "1QFY2016",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df29cb18713cdb2d1fd",
+    "index": 5,
+    "guid": "b7446bdf-f323-4b75-a1a9-dee6be1c92ed",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "1QFY2016",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2c0ce9be7920a73b3",
+    "index": 6,
+    "guid": "a309584f-196f-412b-830c-589bedaf3161",
+    "isActive": false,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "1QFY2016",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df21e27091b2ded566f",
+    "index": 7,
+    "guid": "45a1d371-6ea0-4d08-96d3-e8fcb5237964",
+    "isActive": false,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "1QFY2016",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2fc4659e28a1fd7e4",
+    "index": 8,
+    "guid": "ff19728b-815b-49fe-9d50-464b7152c7e2",
+    "isActive": false,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "1QFY2016",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2b2d57b00e7ac41df",
+    "index": 9,
+    "guid": "e2cf4219-3e77-4b66-a7c7-7bdd0f826023",
+    "isActive": true,
+   "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "1QFY2016",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2e32fab4038c426b3",
+    "index": 10,
+    "guid": "49dd5427-c21a-4b74-87bd-49e51c8f1202",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "1QFY2016",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2c733370f3a94beca",
+    "index": 11,
+    "guid": "07f0d553-9b7f-40e0-9040-39973d434ec0",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "1QFY2016",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df232534d0450cad9af",
+    "index": 12,
+    "guid": "898e0d96-9eb6-4c6e-8ec4-a0ab45f2b4ec",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "COMTOUR",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2ac7fc22fc5a94412",
+    "index": 13,
+    "guid": "c4948dba-e3e4-4a03-871c-66d02adb5c52",
+    "isActive": true,
+   "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "COMTOUR",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2bdfb26c9de0b087d",
+    "index": 14,
+    "guid": "95098b6e-aa5a-47b5-9b21-37eeb7a4a2c9",
+    "isActive": false,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "COMTOUR",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2433a312296002515",
+    "index": 15,
+    "guid": "4f502f39-38e3-4819-a24a-a9b72b6d768d",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "COMTOUR",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2f672fc2cb50d3821",
+    "index": 16,
+    "guid": "c11c3d97-c25a-4f65-8acd-4f8b73d872f2",
+    "isActive": false,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "COMTOUR",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df25a8865bfb53c16e9",
+    "index": 17,
+    "guid": "d253f2d7-3731-4975-8167-188508e94fea",
+    "isActive": false,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "COMTOUR",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2a3bbc0befdcacd7e",
+    "index": 18,
+    "guid": "e43e6c1e-4514-4c14-a1fa-c9319d0b8b94",
+    "isActive": true,
+   "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "COMTOUR",
+    
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df297212c2c391b09f3",
+    "index": 19,
+    "guid": "69cfd8c3-631c-474e-aa35-4d8eff6bfffa",
+    "isActive": false,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2e08471734b104608",
+    "index": 20,
+    "guid": "2ce3756e-24ad-453d-92b5-6b23a8c3bd0e",
+    "isActive": false,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df22ba8bde8520b22dd",
+    "index": 21,
+    "guid": "0a6a150a-407b-4c38-a980-646cb556f02f",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df29c96a34f751725db",
+    "index": 22,
+    "guid": "7a165532-20a2-47e7-83c2-016b42d8e62d",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2e65ea0c85912cd95",
+    "index": 23,
+    "guid": "882f9c91-e489-4cac-b329-dfa2ce988c6e",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2644782ed4f6f5f09",
+    "index": 24,
+    "guid": "2feb1fbd-ae18-4d39-8c78-e985db1c2179",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df26c7c943086a97aa7",
+    "index": 25,
+    "guid": "a556eb4b-823b-402f-8377-b838265123b7",
+    "isActive": false,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2154a869a4a5a36b8",
+    "index": 26,
+    "guid": "93ca4ac3-8cf1-4830-b800-274dad48cbf2",
+    "isActive": false,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2c6c59befed3199cd",
+    "index": 27,
+    "guid": "26d15199-1945-4943-a0b1-0c0ab31c6f0a",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2e8708ed302b644e1",
+    "index": 28,
+    "guid": "391a0b59-23df-40d1-965b-b84d9afaa95c",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2386add40a407a93a",
+    "index": 29,
+    "guid": "db1219d2-fa6a-4169-b378-c3784c653710",
+    "isActive": true,
+"uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2c7859d293f95b2b7",
+    "index": 30,
+    "guid": "d3a59e47-03da-401b-a5d9-43e7da4cddbf",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df25aa3f38aafd8a070",
+    "index": 31,
+    "guid": "d00e78e2-124e-4673-8eb5-da5a91fde4fd",
+    "isActive": false,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df24e17e479535ea964",
+    "index": 32,
+    "guid": "f4101138-2320-4411-9e2e-c4008304c70f",
+    "isActive": false,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df264effcafc2dcb2d1",
+    "index": 33,
+    "guid": "c9aee31e-fca9-4a5e-9934-cee0b45f9374",
+    "isActive": false,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df27a4e47251c6e74ce",
+    "index": 34,
+    "guid": "9fce1d88-65e5-46a5-97f3-7960018f8ea1",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2fee7c063851c8bb3",
+    "index": 35,
+    "guid": "62893cc8-f7c2-4c0e-a5a8-d6ce3ad02031",
+    "isActive": false,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2b6a032389468ea0c",
+    "index": 36,
+    "guid": "f8a7e04a-6a0f-4615-9069-147048189268",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df20f0e4f704270edff",
+    "index": 37,
+    "guid": "89d9a8dc-1524-4e96-8944-5737249b6c6a",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df22a30100338781e68",
+    "index": 38,
+    "guid": "097ef13d-8f1b-43cb-ac9d-7db38b18876d",
+    "isActive": false,
+   "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df25a24af01c890e0e4",
+    "index": 39,
+    "guid": "816d94a2-9bd7-4c48-985d-dcd6d06d28e8",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df25f729072abce9f40",
+    "index": 40,
+    "guid": "42a82ed7-0175-458e-8cdc-5c0c1fb7b636",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2bd3c7be018f4bd37",
+    "index": 41,
+    "guid": "c5f1ba96-399a-4eca-9122-877b71ab84bb",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2c4568f872bb851d1",
+    "index": 42,
+    "guid": "dac83a61-3721-4eb0-a25e-9e3048fbc773",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df2a0b8b80ca8178c43",
+    "index": 43,
+    "guid": "43714a72-463b-4945-8f76-ed30922220d6",
+    "isActive": true,
+    "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+  {
+    "_id": "55bf2df258ae13357022f1ad",
+    "index": 44,
+    "guid": "e1b1b07d-7407-4f8d-a9d9-ee96de1f63f4",
+    "isActive": false,
+   "uid": "Link",
+    "metafile": "Link",
+    "source": "MS",
+    "transactiondate": "04-JUN-2016 16:57:00",
+    "modeldate": "04-JUN-2016 16:37:00",
+    "period": "2QFY2015",
+    "txntype": "MODEL_UPDATE",
+    "txnid": "233477",
+  },
+ ];
+      
+      $scope.datatable = datatable(datatableConfig);
+      $scope.datatable.setData(datatableData);
+    }]);
+  </script>
+ </html>
